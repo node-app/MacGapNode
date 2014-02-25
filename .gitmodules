@@ -1,0 +1,3 @@
+[submodule "Nodelike"]
+	path = Nodelike
+	url = https://github.com/node-app/Nodelike.git

@@ -1,7 +1,15 @@
+#import <JavaScriptCore/JavaScriptCore.h>
+
 #import "ContentView.h"
 #import "WebViewDelegate.h"
 #import "AppDelegate.h"
 #import "JSEventHelper.h"
+
+@interface NLContext
++ (void)attachToContext:(JSContext *)context;
++ (void)runEventLoopSync;
++ (void)runEventLoopAsync;
+@end
 
 @interface WebPreferences (WebPreferencesPrivate)
     - (void)_setLocalStorageDatabasePath:(NSString *)path;
@@ -48,6 +56,9 @@
     [self.webView setShouldCloseWithWindow:NO];
     
     [self.webView setGroupName:@"MacGap"];
+    
+    [NLContext attachToContext:[JSContext contextWithJSGlobalContextRef:self.webView.mainFrame.globalContext]];
+    
 
 }
 
