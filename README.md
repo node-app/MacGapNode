@@ -1,5 +1,3 @@
-#MacGap
-
 ### This is the node-app for of macgap. It provides a bundling between the MacGap and the Node.js APIs.
 
 To compile this special fork, follow these steps:
@@ -9,7 +7,7 @@ To compile this special fork, follow these steps:
 3. open MacGap.xcodeproj
 4. build
 
----
+#Macgap
 
 The MacGap project aims to provide HTML/JS/CSS developers an Xcode project for developing Native OSX Apps that run in OSX's WebView and take advantage of WebKit technologies. The project also exposes a basic JavaScript API for OS integration, such as display Growl notifications. The MacGap project is extremely lightweight and nimble, a blank application is about 0.3mb.
 
