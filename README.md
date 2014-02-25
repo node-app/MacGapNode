@@ -1,4 +1,4 @@
-### This is the node-app for of macgap. It provides a bundling between the MacGap and the Node.js APIs.
+### This is the node-app fork of macgap. It provides a bundling between the MacGap and the Node.js APIs.
 
 To compile this special fork, follow these steps:
 
