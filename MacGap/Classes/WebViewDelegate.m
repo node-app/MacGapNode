@@ -1,3 +1,5 @@
+#import <JavaScriptCore/JavaScriptCore.h>
+
 #import "WebViewDelegate.h"
 #import "Sound.h"
 #import "Dock.h"
@@ -8,6 +10,13 @@
 #import "Window.h"
 #import "WindowController.h"
 #import "Clipboard.h"
+
+@interface NLContext
++ (void)attachToContext:(JSContext *)context;
++ (void)runEventLoopSync;
++ (void)runEventLoopAsync;
+@end
+
 @implementation WebViewDelegate
 
 @synthesize sound;
@@ -38,6 +47,7 @@
     }
     
     [windowScriptObject setValue:self forKey:kWebScriptNamespace];
+    [NLContext attachToContext:[JSContext contextWithJSGlobalContextRef:webView.mainFrame.globalContext]];
 }
 
 
@@ -150,6 +160,10 @@
 - (WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request{
     requestedWindow = [[WindowController alloc] initWithRequest:request];
     return requestedWindow.contentView.webView;    
+}
+
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebView *)WebView {
+    [NLContext runEventLoopSync];
 }
 
 - (void)webViewShow:(WebView *)sender{
