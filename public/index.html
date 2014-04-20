@@ -27,9 +27,10 @@
   <script type="text/javascript" charset="utf-8">
       macgap.notice.notify({title: 'MacGap', content: 'Hello World'});
       
-      //macgap.menu.getItem("File").submenu().addItem("Foo", "", function() { alert("Foo!"); })
-      var a = macgap.menu.getItem("File");
-      alert(a);
+      var fs = require('fs');
+      fs.readdir('/tmp', function(e, files){
+        console.log(files);
+      })
   </script>
   
   <h1>MacGap</h1>

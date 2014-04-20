@@ -5,46 +5,46 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8597AC1F-0F97-4CCC-9FB2-AE5B31158F23</string>
+	<string>2FD2DAE3-AB28-42D8-B053-C8783D13B69D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>MacGap</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>69DE0E59-516B-45A7-AC8B-9A6BB13C9132</key>
-		<string>ssh://github.com/node-app/Nodelike.git</string>
-		<key>84AF2188-2370-44B1-9314-C533D6BB79B0</key>
-		<string>https://github.com/maccman/macgap.git</string>
+		<key>A9216F41-94EA-432D-B376-A29A1FCAFEDD</key>
+		<string>https://github.com/node-app/macgap</string>
+		<key>E3A8802C-FE9A-4249-B99A-C217076B0CAA</key>
+		<string>https://github.com/node-app/Nodelike.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>MacGap.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>69DE0E59-516B-45A7-AC8B-9A6BB13C9132</key>
-		<string>../../Nodelike</string>
-		<key>84AF2188-2370-44B1-9314-C533D6BB79B0</key>
+		<key>A9216F41-94EA-432D-B376-A29A1FCAFEDD</key>
 		<string>../..</string>
+		<key>E3A8802C-FE9A-4249-B99A-C217076B0CAA</key>
+		<string>../../Nodelike</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/maccman/macgap.git</string>
+	<string>https://github.com/node-app/macgap</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>84AF2188-2370-44B1-9314-C533D6BB79B0</string>
+	<string>A9216F41-94EA-432D-B376-A29A1FCAFEDD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>84AF2188-2370-44B1-9314-C533D6BB79B0</string>
+			<string>A9216F41-94EA-432D-B376-A29A1FCAFEDD</string>
 			<key>IDESourceControlWCCName</key>
-			<string>macgap</string>
+			<string>node-like:macgap</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>69DE0E59-516B-45A7-AC8B-9A6BB13C9132</string>
+			<string>E3A8802C-FE9A-4249-B99A-C217076B0CAA</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Nodelike</string>
 		</dict>
