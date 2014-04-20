@@ -52,6 +52,15 @@ App:
     // Launch application
     macgap.app.launch("TextEdit");
 
+	// Set a custom user agent string
+	macgap.app.setCustomUserAgent('new user agent string');
+	
+	// Get the system idle time. This example outputs the idle time to the console once per second.
+	window.setInterval(function(){
+		console.log( macgap.app.systemIdleTime() );
+    }, 1000);
+
+	
 Clipboard:
 
     // copy text to clipboard
@@ -67,6 +76,10 @@ Window:
 
     // Resize window
     macgap.window.resize({width: 400, height: 200});
+
+	// Get the window coordinates
+	macgap.window.getX();
+	macgap.window.getY();
 
     // Move window (Bottom left is x:0 and y:0)
     macgap.window.move({x:0, y: 200});
@@ -90,6 +103,15 @@ Path:
 
     // Path to application's resources
     macgap.path.resource;
+    
+    // Path to the current user's documents directory.
+    macgap.path.documents;
+
+    // Path to the application's home directory. This is the application’s sandbox directory or the current user’s home directory (if the application is not in a sandbox).
+    macgap.path.home;
+    
+    // Path to the App's temp directory.
+    macgap.path.temp;
 
 Dock:
 
@@ -119,14 +141,99 @@ Notice:
       title: "Notify",
       content: "New Message!"
     });
+    
+Fonts:
+
+    // Return an array of installed font names
+    macgap.fonts.availableFonts();
+    
+    // Return an array of installed font families
+    macgap.fonts.availableFontFamilies();
+
+	// Return the fonts in the given font family.
+    macgap.fonts.availableMembersOfFontFamily('Helvetica');
 
 Events:
 
-    //Mac OS X on wake event.
+    // Mac OS X on wake event.
     document.addEventListener('wake', function(){console.log('Wake!!')}, true);
 
-    //Mac OS X on sleep event.
+    // Mac OS X on sleep event.
     document.addEventListener('sleep', function(){console.log('Sleep!!')}, true);
+    
+    // Mac OS X app was activated.
+    document.addEventListener('appActivated', function(e {
+        console.log(e.data);
+        var appName = e.data.localizedName;
+        var bundleURL = e.data.bundleURL;
+    }, true);
+    
+Menus:
+
+    // Add a menu item.
+    macgap.menu.getItem("File").submenu().addItem("Foo", "cmd+opt+g", function() { alert("Foo!"); })
+    
+    // Menu item keyboard commands can include any of the following modifiers: caps, shift, cmd, ctrl, opt, alt
+
+    // Add a menu item separator.
+	macgap.menu.getItem("File").submenu().addSeparator();
+
+    // Remove a menu item or an entire menu.
+    macgap.menu.getItem("File").remove(); // Remove the file menu
+    macgap.menu.getItem("File").submenu().getItem("Foo").remove(); // Remove the file menu's "foo" item
+
+	// Remove a menu item.
+	macgap.menu.getItem("File").submenu().getItem("Close").remove();
+	
+	// Change the callback for a menu item.
+	macgap.menu.getItem("File").submenu().getItem("Foo").setCallback(function(){alert('Foo new');});
+
+	// Change the key command for a menu item.
+	macgap.menu.getItem("File").submenu().getItem("Foo").setKey('cmd-opt-ctrl-g');
+
+	// Change the title of a menu item.
+	macgap.menu.getItem("File").submenu().getItem("Foo").setTitle('Foonew');
+
+	// Add a new submenu for a menu item.
+	macgap.menu.getItem("File").submenu().getItem('Foo').addSubmenu().addItem("Foofoo", "cmd+opt+h", function() { alert("Foofoo!"); })
+
+User Defaults:
+
+    // Get all user defaults. Returns a JSON string.
+    macgap.userDefaults.getUserDefaults();
+    
+    // example usage:
+    
+    var defaults = JSON.parse( macgap.userDefaults.getUserDefaults() );
+
+    // Set the user default at the specified key. Objective-C is strongly typed, unlike JavaScript. For security, keys are automatically preceded with 'macgap.'. If this is omitted it will be added automatically. Thus the following two statements are functionally identical.
+    
+    macgap.userDefaults.setString('macgap.mykey', 'mystring');
+    macgap.userDefaults.setString('mykey', 'mystring');
+
+    macgap.userDefaults.setInteger('macgap.mykey', 5);
+    macgap.userDefaults.setBool('macgap.mykey', 1);
+    macgap.userDefaults.setFloat('macgap.mykey', 12.345678);
+
+	// Get the user default for the specified key. Objective-C is strongly typed, unlike JavaScript.
+	macgap.userDefaults.getString('macgap.mykey');
+	macgap.userDefaults.getInteger('macgap.mykey');
+	macgap.userDefaults.getBool('macgap.mykey');
+	macgap.userDefaults.getFloat('macgap.mykey');
+	
+	// Remove the user default for the specified key.
+	macgap.userDefaults.removeObjectForKey('macgap.mykey');
+
+	// Be notified when the user defaults are changed. To see what was changed, store a local snapshot of the object and compare to it.
+	document.addEventListener('userDefaultsChanged', function(e) {
+		console.log(e.data);
+    }, true);
+
+User defaults added by JavaScript will be automatically namespaced by prefixing `macgap.`. This ensures it is not possible for JavaScript to modify or delete User Defaults which it did not create, as a security measure.
+
+The User Defaults provide a large amount of interesting data that is now available to your JavaScript app.
+
+It can also be used to implement an easy channel for communication between JavaScript and objects placed into the app using Interface Builder in Xcode eg Toolbars, buttons, preference windows. These can be bound directly to the User Defaults in Interface Builder, without writing any Objective-C code.
 
 ##Offline Patterns
 
@@ -136,7 +243,7 @@ First you can define a refresh tag in `index.html`, which will immediately forwa
 
     <meta http-equiv="refresh" content="0;url=http://example.com">
 
-Then use [HTML5 offline APIs](http://www.w3.org/TR/html5/offline.html) to cache your application locally. The first time your application launches, it'll download all the remote resources for use offline. Then during subsequent launches the locally cached resources will be used, and the application will fully function offline. If your remote application changes, then the cache manifest will be updated and application re-cached.
+Then use [HTML5 offline APIs](http://www.w3.org/TR/offline-webapps/) to cache your application locally. The first time your application launches, it'll download all the remote resources for use offline. Then during subsequent launches the locally cached resources will be used, and the application will fully function offline. If your remote application changes, then the cache manifest will be updated and application re-cached.
 
 ##Attributes
 
