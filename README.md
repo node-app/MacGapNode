@@ -165,7 +165,7 @@ Events:
     document.addEventListener('sleep', function(){console.log('Sleep!!')}, true);
     
     // Mac OS X app was activated.
-    document.addEventListener('appActivated', function(e {
+    document.addEventListener('appActivated', function(e) {
         console.log(e.data);
         var appName = e.data.localizedName;
         var bundleURL = e.data.bundleURL;
